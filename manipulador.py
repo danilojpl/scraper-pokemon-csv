@@ -13,7 +13,7 @@ def remove_a_key(d, remove_key):
 
 
 js1 = pd.read_json('scrapy1.json')
-js2  = pd.read_json('scrapy1.json')
+js2  = pd.read_json('scrapy2.json')
 
 
 df_inner = pd.merge(js1, js2, how='outer', left_on=[
