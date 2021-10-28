@@ -17,8 +17,8 @@ class PokemonScrapper(scrapy.Spider):
   def parse_pokemon(self, response):
     yield {'pokemon_numero': response.xpath("*//tbody/tr[1]/th/big/big/a/span/text()").re_first(r'#+(\w+)')
         ,'pokemon_nome': response.xpath("*//table/tbody/tr/td[1]/big/big/b/text()").get()
-        ,'pokemon_altura': response.xpath("*//div/table[2]/tbody/tr[6]/td[1]/table/tbody/tr[1]/td/text()").getall()
-        ,'pokemon_peso': response.xpath("*//div/table[2]/tbody/tr[6]/td[2]/table/tbody/tr[1]/td/text()").getall()
-        ,'pokemon_cor_pokedex': response.xpath("*//tr[11]/td[1]/table/tbody/tr/td/text()").get()}
+        ,'pokemon_altura': ''.join(s.strip('/[]|\n\"') for s in response.xpath("*//div/table[2]/tbody/tr[6]/td[1]/table/tbody/tr[1]/td/text()").getall()).replace('\\',' ')
+        ,'pokemon_peso': ''.join(s.strip() for s in response.xpath("*//div/table[2]/tbody/tr[6]/td[2]/table/tbody/tr[1]/td/text()").getall())
+        ,'pokemon_cor_pokedex': ''.join(s.strip() for s in response.xpath("*//tr[11]/td[1]/table/tbody/tr/td/text()").get())}
   
 

@@ -1,5 +1,6 @@
 from collections import OrderedDict, defaultdict
 import pandas as pd 
+import numpy as np 
 import json
 
 
@@ -45,15 +46,6 @@ for x in new_dict:
             index = lista.index(new_dict[x]['pokemon_nome'])
             new_dict[x]['pokemon_evolucao']=lista[index+1:]
 
-#remover \n
-for x in new_dict:
-    for y in new_dict[x]:
-        listaA = new_dict[x]['pokemon_altura']
-        listaP = new_dict[x]['pokemon_peso']
-        listaA = map(lambda s: s.strip(), listaA)
-        listaP = map(lambda s: s.strip(),listaP)
-        new_dict[x]['pokemon_altura']=list(listaA)
-        new_dict[x]['pokemon_peso']=list(listaP)
 
 #remover duplicados
 for x in new_dict:
@@ -63,7 +55,7 @@ for x in new_dict:
       new_dict[x]['pokemon_evolucao'] =listaE 
 
 df = pd.DataFrame.from_dict(new_dict, orient="index")
-df.to_csv("data.csv")
+df.to_csv('data.csv')
 
 
 
