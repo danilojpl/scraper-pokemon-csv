@@ -21,4 +21,4 @@ class PokemonScrapper2(scrapy.Spider):
           ,'pokemon_evolucao': response.css("table tr td.pkmn a>img ::attr(alt)").getall() or response.css("table tr td.pkmn a::attr(href)").re(r'swsh\/(\w*)')
           ,'pokemon_tipo_dano': response.css("tr:nth-child(2) td>a>img::attr(alt)").re(r'Type:\s*(\w*)-')
           ,'pokemon_dano': response.css("table tr:nth-child(3) td.footype::text").getall()
-          ,'pokemon_tipo': response.css("tr:nth-child(2) td.cen a>img::attr(alt)").re(r'\s*(\w*)-')}
+          ,'pokemon_tipo': response.css("tr:nth-child(2) td.cen>a>img::attr(alt)").re(r'\s*(\w*)-') or response.css("tr:nth-child(2) td.cen table tr:nth-child(1) td:nth-child(2) a>img::attr(alt)").re(r'\s*(\w*)-')}
